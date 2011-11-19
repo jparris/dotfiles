@@ -1,0 +1,189 @@
+" ----------------------------------------------------------------------------
+" Preamble
+" ----------------------------------------------------------------------------
+"filetype off
+call pathogen#runtime_append_all_bundles()
+filetype on
+filetype plugin indent on
+set nocompatible
+
+
+
+" ----------------------------------------------------------------------------
+" Inner Workings
+" ----------------------------------------------------------------------------
+set encoding=utf-8
+au FocusLost * :wa                          " Saves Buffers when focus is lost
+"autocmd VimLeave * silent !echo -e \"\e[0m"  " Reset the terminal on exit
+set nocompatible
+set spell
+
+" Backups --------------------------------------------------------------------
+set undodir=~/.vim/tmp/undo/                " undo files
+set backupdir=~/.vim/tmp/backup/            " backups
+set directory=~/.vim/tmp/swap/              " swap files
+set backup                                  " enable backups
+
+
+
+" ----------------------------------------------------------------------------
+" Filetype
+" ----------------------------------------------------------------------------
+augroup ft_c
+    au FileType c setlocal foldmethod=syntax
+augroup END 
+
+"augroup ft_python
+"    au!
+au FileType python setlocal omnifunc=pythoncomplete#Complete
+"augroup END
+
+
+" ----------------------------------------------------------------------------
+" Functions
+" ----------------------------------------------------------------------------
+function! StripWhitespace ()
+    exec ':%s/ \+$//gc'
+endfunction
+map ,s :call StripWhitespace ()<CR>
+
+
+" ----------------------------------------------------------------------------
+" Key Mappings
+" ---------------------------------------------------------------------------- 
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+
+noremap <C-h>  <C-w>h
+noremap <C-j>  <C-w>j
+noremap <C-k>  <C-w>k
+noremap <C-l>  <C-w>l
+noremap <leader>v <C-w>v
+
+
+" ----------------------------------------------------------------------------
+" Plugin settings
+" ----------------------------------------------------------------------------
+"  
+" Rainbows Parenthesis -------------------------------------------------------
+nnoremap <leader>R :RainbowParenthesesToggle<cr>
+au VimEnter * RainbowParenthesesToggle
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+
+" Supertab -------------------------------------------------------------------
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabLongestHighlight = 1
+
+" Tagbar ---------------------------------------------------------------------
+let g:tagbar_usearrows = 1
+nnoremap <leader>l :TagbarToggle<CR>
+
+
+" ----------------------------------------------------------------------------
+" UI
+" ----------------------------------------------------------------------------
+set hidden
+set smartindent
+set virtualedit=all
+
+" Color scheme ---------------------------------------------------------------
+set backspace=indent,eol,start
+syntax on
+set background=dark
+colorscheme CloudsMidnight
+
+" Folding --------------------------------------------------------------------
+
+set fillchars=fold:\ 
+nnoremap <space> za
+vnoremap <space> zf
+
+" GUI ------------------------------------------------------------------------
+"if has('gui_running')
+"highlight SpellBad term=standout gui=standout guisp=Orange 
+set fuopt+=maxhorz
+
+set guicursor=n-c:block-Cursor-blinkon0
+set guicursor+=v:block-vCursor-blinkon0
+"set guicursor+=i-ci:ver20-iCursor "Breaks Clouds Moonlight
+
+set guifont=Monaco:h12
+set guioptions-=T
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R 
+
+set fillchars+=vert:│
+
+
+" Mouse ----------------------------------------------------------------------
+set mouse=a           "Enable mouse everywhere
+set mousehide           "Hide the mouse when I type
+set mousemodel=popup    "Pop
+
+"Search ----------------------------------------------------------------------
+set hlsearch    " Highlight the results
+set ignorecase  " Ignore the Search Case
+set incsearch   " Search as-I-Type
+set smartcase
+
+"Tabs, Spaces, and Wrapping --------------------------------------------------
+set autoindent
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set smarttab
+set shiftround
+set textwidth=80
+set formatoptions=qrn1
+set colorcolumn=+1
+set nojoinspaces
+
+" Wildmenu Completion --------------------------------------------------------
+set wildmenu
+set wildmode=list:longest                       " Lets ignore some useless stuff
+set wildignore+=.hg,.git                        " Version Control
+set wildignore+=*.aux,*.out,*.toc               " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg  " binary images
+set wildignore+=*.o,*.so,*.pyc                  " complied objects
+set wildignore+=*.sw?                           " Vim swap files
+set wildignore+=.DS_Store                       " OSX Desktop Store files
+
+" Visual Cues ----------------------------------------------------------------
+set cursorline
+set laststatus=2
+set list
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·
+set nostartofline
+set number
+set ruler
+set showbreak=↪
+set showcmd
+set showmatch
+set visualbell
