@@ -55,22 +55,28 @@ nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+"inoremap <up> <nop>
+"inoremap <down> <nop>
+"inoremap <left> <nop>
+"inoremap <right> <nop>
 
+" wmii like movement among buffers
 noremap <C-h>  <C-w>h
 noremap <C-j>  <C-w>j
 noremap <C-k>  <C-w>k
 noremap <C-l>  <C-w>l
 noremap <leader>v <C-w>v
 
+" noremap <C-H>  <C-w>H
+" noremap <C-J>  <C-w>J
+" noremap <C-K>  <C-w>K
+" noremap <C-L>  <C-w>L 
 
 " ----------------------------------------------------------------------------
 " Plugin settings
 " ----------------------------------------------------------------------------
-"  
+" NERD-Tree ------------------------------------------------------------------
+map <D-1> :NERDTreeToggle<CR>  
 " Rainbows Parenthesis -------------------------------------------------------
 nnoremap <leader>R :RainbowParenthesesToggle<cr>
 au VimEnter * RainbowParenthesesToggle
@@ -100,7 +106,7 @@ let g:SuperTabLongestHighlight = 1
 
 " Tagbar ---------------------------------------------------------------------
 let g:tagbar_usearrows = 1
-nnoremap <leader>l :TagbarToggle<CR>
+map <D-2> :TagbarToggle<CR>
 
 
 " ----------------------------------------------------------------------------
@@ -136,7 +142,8 @@ set guioptions-=T
 set guioptions-=l
 set guioptions-=L
 set guioptions-=r
-set guioptions-=R 
+set guioptions-=R
+set guioptions-=e   "Get rid of those annoy gui tabs
 
 set fillchars+=vert:│
 
