@@ -1,0 +1,37 @@
+# Configs
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+
+# Positions
+alias full          move screenOriginX;screenOriginY                  screenSizeX;screenSizeY
+alias lefthalf      move screenOriginX;screenOriginY                  screenSizeX/2;screenSizeY
+alias righthalf     move screenOriginX+screenSizeX/2;screenOriginY    screenSizeX/2;screenSizeY
+alias rightmost     move screenOriginX+screenSizeX*0.4;screenOriginY  screenSizeX*0.6;screenSizeY
+alias rightless     move screenOriginX+screenSizeX*0.6;screenOriginY  screenSizeX*0.4;screenSizeY
+alias leftmost      move screenOriginX;screenOriginY                  screenSizeX*0.6;screenSizeY
+alias leftless      move screenOriginX;screenOriginY                  screenSizeX*0.4;screenSizeY
+
+# Layouts
+layout coding 'MacVim':MAIN_FIRST ${leftmost}
+layout coding 'Terminal':REPEAT ${rightless}
+layout coding 'Google Chrome':REPEAT ${rightless}
+
+bind e:cmd layout coding
+
+# Throw Bindings
+bind l:alt;shift push right bar-resize:screenSizeX*0.4
+bind h:alt;shift push left bar-resize:screenSizeX*0.6
+bind j:alt;shift push bottom bar-resize:screenSizeX*0.4
+bind k:alt;shift push up bar-resize:screenSizeX
+
+# Focus Bindings
+bind l:alt    focus right
+bind h:alt     focus left
+bind k:alt;cmd       focus up
+bind j:alt;cmd     focus down
+bind k:alt   focus above
+bind j:alt focus behind
+
+# Window Hints
+bind esc:cmd hint
